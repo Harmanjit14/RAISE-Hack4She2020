@@ -34,7 +34,7 @@ final Map<DateTime, List> periodDays = {
   DateTime(2020, 11, 2): ['Easter Monday'],
 };
 HttpLink _httpLink = HttpLink(
-  uri: 'healthzen-backend.herokuapp.com/graphql',
+  uri: "https://healthzen-backend.herokuapp.com/graphql",
 );
 AuthLink _authLink = AuthLink(
   //  headerKey: "Authorization",
