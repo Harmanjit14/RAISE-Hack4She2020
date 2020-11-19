@@ -1,5 +1,6 @@
-import 'package:graphql/client.dart';
+// import 'package:graphql/client.dart';
 import 'package:flutter/material.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 
 String email = "";
 String password = "";
@@ -33,23 +34,12 @@ final Map<DateTime, List> periodDays = {
   DateTime(2020, 11, 1): ['Easter Sunday'],
   DateTime(2020, 11, 2): ['Easter Monday'],
 };
-HttpLink _httpLink = HttpLink(
-  uri: "https://healthzen-backend.herokuapp.com/graphql",
-);
-AuthLink _authLink = AuthLink(
-  //  headerKey: "Authorization",
-  getToken: () async {
-    return "$token";
-  },
-);
-Link _link = _authLink.concat(_httpLink);
-GraphQLClient _client = GraphQLClient(
-  defaultPolicies: DefaultPolicies(
-      mutate: Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
-      query: Policies(fetch: FetchPolicy.noCache)),
-  cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
-  link: _link,
-);
+
+HasuraConnect hasuraConnect =
+    HasuraConnect("https://healthzen-backend.herokuapp.com/graphql", headers: {
+  "Authorization": "$token",
+  "Content-Type": "application/json",
+});
 
 Future<int> getToken() async {
   String getAuthToken = """
@@ -59,11 +49,7 @@ Future<int> getToken() async {
     }
   }
 """;
-  MutationOptions tokenGet = MutationOptions(
-    documentNode: gql(getAuthToken),
-  );
-
-  QueryResult result = await _client.mutate(tokenGet);
+  var result = await hasuraConnect.mutation(getAuthToken);
   if (result.hasException) {
     print(result.exception);
     return 0;
@@ -86,15 +72,12 @@ Future<int> getProfile() async {
       Weight
       Gender
       mobile
-      city 
+      city
       state
     }
   }
 """;
-  QueryOptions myprofile = QueryOptions(
-      documentNode: gql(queryProfile), fetchPolicy: FetchPolicy.networkOnly);
-
-  QueryResult result = await _client.query(myprofile);
+  var result = await hasuraConnect.query(queryProfile);
   if (result.hasException) {
     print(result.exception);
     return 0;
@@ -122,15 +105,7 @@ Future<int> createUser() async {
     }
   }
 """;
-  MutationOptions createAcc = MutationOptions(
-      documentNode: gql(createMutation),
-      fetchPolicy: FetchPolicy.networkOnly,
-      errorPolicy: ErrorPolicy.all,
-      onError: (val) {
-        print(val);
-      });
-
-  QueryResult result = await _client.mutate(createAcc);
+  var result = await hasuraConnect.mutation(createMutation);
   print(result);
   if (result.loading) {
     print("loading");
@@ -202,12 +177,12 @@ Future<int> updateProfileFunction() async {
 
   String createMutation = '''
   mutation{
-    updateProfile(name : "$tempname", 
-    mobile : "$tempmobile", 
-    age : $tempage , 
+    updateProfile(name : "$tempname",
+    mobile : "$tempmobile",
+    age : $tempage ,
     gender : "$gender",
-    city :"$tempcity", 
-    state : "$tempstate", 
+    city :"$tempcity",
+    state : "$tempstate",
     weight : $tempweight,
     height:$tempheight){
         profile{
@@ -216,11 +191,7 @@ Future<int> updateProfileFunction() async {
     }
   }
 ''';
-  MutationOptions createOptions = MutationOptions(
-    documentNode: gql(createMutation),
-  );
-
-  QueryResult result = await _client.mutate(createOptions);
+ var result = await hasuraConnect.mutation(createMutation);
   if (result.loading) {
     print("loading");
     return 1;
