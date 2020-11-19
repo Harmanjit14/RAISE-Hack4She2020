@@ -65,8 +65,8 @@ class _AuthState extends State<Auth> with ColorFile {
               Container(
                 child: TextLiquidFill(
                   waveDuration: Duration(seconds: 1),
-                  loadDuration: Duration(seconds: 7),
-                  text: 'healthZen',
+                  loadDuration: Duration(seconds: 5),
+                  text: 'RAISE',
                   waveColor: white,
                   boxBackgroundColor: deepBrown,
                   textStyle: GoogleFonts.raleway(

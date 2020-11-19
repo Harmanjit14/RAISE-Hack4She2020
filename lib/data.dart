@@ -1,4 +1,6 @@
 // import 'package:graphql/client.dart';
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
@@ -98,27 +100,23 @@ Future<int> getProfile() async {
 Future<int> createUser() async {
   String createMutation = """
   mutation{
-    createUser(email:"",password:""){
+    createUser(email:"$email",password:"$password"){
       user{
         email
       }
     }
   }
 """;
-  var result = await hasuraConnect.mutation(createMutation);
-  print(result);
-  if (result.loading) {
-    print("loading");
-    return 0;
-  } else if (result.hasException) {
-    print("failed");
-    print(result.exception);
-    return 0;
-  } else {
-    print("done");
-    // String tempVar = result.data["createUser"]["__typename"];
-    // print(tempVar);
+  // var result;
+  // var excep;
+  try {
+    await hasuraConnect
+        .mutation(createMutation)
+        .then((value) => {print(value["data"]["createUser"]["user"]["email"])});
     return 1;
+  } catch (e) {
+    print(e);
+    return 0;
   }
 }
 
@@ -191,7 +189,7 @@ Future<int> updateProfileFunction() async {
     }
   }
 ''';
- var result = await hasuraConnect.mutation(createMutation);
+  var result = await hasuraConnect.mutation(createMutation);
   if (result.loading) {
     print("loading");
     return 1;
