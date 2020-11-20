@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:graphql/client.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 
 String email = "";
 String password = "";
@@ -230,27 +231,8 @@ void bmiCal() {
 }
 
 Future<int> createUser() async {
-  HttpLink _httpLink = HttpLink(
-    headers: {
-      "Authorization": "$token",
-    },
-    uri: "https://healthzen-backend.herokuapp.com/graphql",
-  );
-  AuthLink _authLink = AuthLink(
-    //  headerKey: "Authorization",
-    getToken: () async {
-      return "JWT $token";
-    },
-  );
-  Link _link = _authLink.concat(_httpLink);
-  GraphQLClient _client = GraphQLClient(
-    defaultPolicies: DefaultPolicies(
-        mutate:
-            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
-        query: Policies(fetch: FetchPolicy.noCache)),
-    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
-    link: _link,
-  );
+  HasuraConnect hasuraConnect =
+      HasuraConnect("https://healthzen-backend.herokuapp.com/graphql");
   String createMutation = """
   mutation{
     createUser(email:"$email",password:"$password"){
@@ -260,28 +242,16 @@ Future<int> createUser() async {
     }
   }
 """;
-  MutationOptions createAcc = MutationOptions(
-      documentNode: gql(createMutation),
-      fetchPolicy: FetchPolicy.networkOnly,
-      errorPolicy: ErrorPolicy.all,
-      onError: (val) {
-        print(val);
-      });
-
-  QueryResult result = await _client.mutate(createAcc);
-  print(result);
-  if (result.loading) {
-    print("loading");
-    return 0;
-  } else if (result.hasException) {
-    print("failed");
-    print(result.exception);
-    return 0;
-  } else {
-    print("done");
-    // String tempVar = result.data["createUser"]["__typename"];
-    // print(tempVar);
+  // var result;
+  // var excep;
+  try {
+    await hasuraConnect
+        .mutation(createMutation)
+        .then((value) => {print(value["data"]["createUser"]["user"]["email"])});
     return 1;
+  } catch (e) {
+    print(e);
+    return 0;
   }
 }
 

@@ -561,7 +561,7 @@ class _AuthState extends State<Auth> with ColorFile {
                             setState(() {});
                           });
                           Timer(Duration(seconds: 3), () {
-                            // Navigator.pushNamed(context, "/dash");
+                             Navigator.pushReplacementNamed(context, "/createProfile");
                           });
                         } else {
                           Timer(Duration(seconds: 2), () {
