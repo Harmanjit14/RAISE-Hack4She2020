@@ -253,7 +253,7 @@ Future<int> createUser() async {
   );
   String createMutation = """
   mutation{
-    createUser(email:"",password:""){
+    createUser(email:"$email",password:"$password"){
       user{
         email
       }

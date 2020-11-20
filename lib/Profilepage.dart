@@ -569,7 +569,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> with ColorFile {
                         int temp = await updateProfileFunction();
                         int temp2 = await getProfile();
 
-                        if (temp == 1) {
+                        if (temp == 1 && temp2==1) {
                           Timer(Duration(seconds: 2), () {
                             stateButP = 2;
                             setState(() {});
