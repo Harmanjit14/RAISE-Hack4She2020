@@ -33,25 +33,51 @@ final Map<DateTime, List> periodDays = {
   DateTime(2020, 11, 1): ['Easter Sunday'],
   DateTime(2020, 11, 2): ['Easter Monday'],
 };
-HttpLink _httpLink = HttpLink(
-  uri: "https://healthzen-backend.herokuapp.com/graphql",
-);
-AuthLink _authLink = AuthLink(
-  //  headerKey: "Authorization",
-  getToken: () async {
-    return "$token";
-  },
-);
-Link _link = _authLink.concat(_httpLink);
-GraphQLClient _client = GraphQLClient(
-  defaultPolicies: DefaultPolicies(
-      mutate: Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
-      query: Policies(fetch: FetchPolicy.noCache)),
-  cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
-  link: _link,
-);
+// Client temp = Client()
+// HttpLink _httpLink = HttpLink(
+//   headers: {
+//     "Authorization": "$token",
+//   },
+//   uri: "https://healthzen-backend.herokuapp.com/graphql",
+// );
+// AuthLink _authLink = AuthLink(
+//   //  headerKey: "Authorization",
+//   getToken: () async {
+//     return "JWT $token";
+//   },
+// );
+// Link _link = _authLink.concat(_httpLink);
+// GraphQLClient _client = GraphQLClient(
+//   defaultPolicies: DefaultPolicies(
+//       mutate: Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+//       query: Policies(fetch: FetchPolicy.noCache)),
+//   cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+//   link: _link,
+// );
 
 Future<int> getToken() async {
+  HttpLink _httpLink = HttpLink(
+    headers: {
+      "Authorization": "$token",
+    },
+    uri: "https://healthzen-backend.herokuapp.com/graphql",
+  );
+  AuthLink _authLink = AuthLink(
+    //  headerKey: "Authorization",
+    getToken: () async {
+      return "JWT $token";
+    },
+  );
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient _client = GraphQLClient(
+    defaultPolicies: DefaultPolicies(
+        mutate:
+            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+        query: Policies(fetch: FetchPolicy.noCache)),
+    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+    link: _link,
+  );
+
   String getAuthToken = """
   mutation{
     tokenAuth(email : "$email", password: "$password"){
@@ -76,6 +102,27 @@ Future<int> getToken() async {
 }
 
 Future<int> getProfile() async {
+  HttpLink _httpLink = HttpLink(
+    headers: {
+      "Authorization": "$token",
+    },
+    uri: "https://healthzen-backend.herokuapp.com/graphql",
+  );
+  AuthLink _authLink = AuthLink(
+    //  headerKey: "Authorization",
+    getToken: () async {
+      return "JWT $token";
+    },
+  );
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient _client = GraphQLClient(
+    defaultPolicies: DefaultPolicies(
+        mutate:
+            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+        query: Policies(fetch: FetchPolicy.noCache)),
+    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+    link: _link,
+  );
   print(token);
   String queryProfile = """
   {
@@ -113,6 +160,27 @@ Future<int> getProfile() async {
 }
 
 Future<int> createUser() async {
+  HttpLink _httpLink = HttpLink(
+    headers: {
+      "Authorization": "$token",
+    },
+    uri: "https://healthzen-backend.herokuapp.com/graphql",
+  );
+  AuthLink _authLink = AuthLink(
+    //  headerKey: "Authorization",
+    getToken: () async {
+      return "JWT $token";
+    },
+  );
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient _client = GraphQLClient(
+    defaultPolicies: DefaultPolicies(
+        mutate:
+            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+        query: Policies(fetch: FetchPolicy.noCache)),
+    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+    link: _link,
+  );
   String createMutation = """
   mutation{
     createUser(email:"",password:""){
@@ -176,6 +244,27 @@ String getbmiLog() {
 }
 
 Future<int> updateProfileFunction() async {
+  HttpLink _httpLink = HttpLink(
+    headers: {
+      "Authorization": "$token",
+    },
+    uri: "https://healthzen-backend.herokuapp.com/graphql",
+  );
+  AuthLink _authLink = AuthLink(
+    //  headerKey: "Authorization",
+    getToken: () async {
+      return "$token";
+    },
+  );
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient _client = GraphQLClient(
+    defaultPolicies: DefaultPolicies(
+        mutate:
+            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+        query: Policies(fetch: FetchPolicy.noCache)),
+    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+    link: _link,
+  );
   // print(tempname);
   print(tempgender);
   if (tempname == "" || tempname == null) {

@@ -574,7 +574,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> with ColorFile {
                             setState(() {});
                           });
                           Timer(Duration(seconds: 3), () {
-                            Navigator.popAndPushNamed(context, "/dash");
+                            Navigator.pushReplacementNamed(context, "/dash");
                           });
                         } else {
                           Timer(Duration(seconds: 2), () {
