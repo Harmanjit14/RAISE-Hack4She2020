@@ -3,6 +3,7 @@ import 'package:RAISE/colorFile.dart';
 import 'package:RAISE/data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HomeWid extends StatefulWidget {
@@ -25,6 +26,7 @@ class _HomeWidState extends State<HomeWid> with ColorFile {
   }
 
   Widget genderChild() {
+    // pString = "Start Tracking";
     if (gender == "F") {
       return Container(
         margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
@@ -56,7 +58,32 @@ class _HomeWidState extends State<HomeWid> with ColorFile {
                     splashColor: lightPink,
                     highlightedBorderColor: Colors.pink[700],
                     borderSide: BorderSide(color: Colors.pink[700], width: 2),
-                    onPressed: () {},
+                    onPressed: () {
+                      Alert(
+                        context: context,
+                        type: AlertType.info,
+                        title: "Add to my Calendar",
+                        desc:
+                            "Use this feature when you are on your periods so that it can track them more efficiently ",
+                        buttons: [
+                          DialogButton(
+                            highlightColor: deepPink,
+                            child: Text(
+                              pString,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () async {
+                              await addPeriodInfo();
+                              pString = "Done!";
+                              setState(() {});
+                              Navigator.pop(context);
+                            },
+                            color: deepPink,
+                          ),
+                        ],
+                      ).show();
+                    },
                     child: Text(
                       "Add",
                       style: GoogleFonts.poppins(

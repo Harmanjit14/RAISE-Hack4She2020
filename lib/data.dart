@@ -26,6 +26,7 @@ String tempcity = city, tempstate = state;
 int tempmobile = mobile;
 int tempage = age, tempheight = height, tempweight = weight;
 String token;
+String pString = "Start Tacking";
 
 final Map<DateTime, List> exerciseDays = {
   DateTime(2020, 11, 11): ['New Year\'s Day'],
@@ -509,14 +510,28 @@ Future<int> addPeriodInfo() async {
     cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
     link: _link,
   );
+  var temp = DateTime.now();
   String createMutation = '''
   mutation{
-    
+     addPeriod(date:${temp.day},month:${temp.month},year:${temp.year}){
+     __typename
+   }
   }
 ''';
   MutationOptions createOptions = MutationOptions(
     documentNode: gql(createMutation),
   );
-
   QueryResult result = await _client.mutate(createOptions);
+
+  if (result.hasException) {
+    print("failed");
+    print(result.exception);
+    return 0;
+  } else {
+    print("done");
+    // String tempVar = result.data["createProfile"]["profile"]["name"].toString();
+    // print(tempVar);
+    // bmiCal();
+    return 1;
+  }
 }
