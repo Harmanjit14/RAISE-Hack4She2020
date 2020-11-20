@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:graphql/client.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -19,7 +18,7 @@ String selcPeriod = "";
 Color bmiCol = Colors.red;
 Color activeColor = Colors.red;
 Color activeColorP = Colors.black;
-double bmi;
+double bmi = (weight * 10000)/(height*height);
 String bmiLog = "";
 String tempname = name;
 String tempgender;
@@ -202,15 +201,10 @@ Future<int> getProfile() async {
     city = result.data["myprofile"]["city"];
     state = result.data["myprofile"]["state"];
     mobile = result.data["myprofile"]["mobile"];
-    bmiCal();
     return 1;
   }
 }
 
-void bmiCal() {
-  bmi = (weight) / (height * height);
-  bmi = bmi * 10000;
-}
 
 Future<int> createUser() async {
   HasuraConnect hasuraConnect =

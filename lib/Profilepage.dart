@@ -575,7 +575,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> with ColorFile {
                             setState(() {});
                           });
                           Timer(Duration(seconds: 3), () {
-                            bmiCal();
+                            // bmiCal();
                             Navigator.pop(context);
                             setState(() {});
                           });
@@ -966,7 +966,7 @@ class _CreateMyProfileState extends State<CreateMyProfile> with ColorFile {
                             setState(() {});
                           });
                           Timer(Duration(seconds: 3), () async {
-                            bmiCal();
+                            // bmiCal();
                             await getProfile();
                             Navigator.pushReplacementNamed(context, "/dash");
                             setState(() {});

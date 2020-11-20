@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget with ColorFile {
         '/createProfile': (context) => CreateMyProfile(),
       },
       initialRoute: "/",
-      //TODO: ROUTES SAHI KARNE HAI
+     
     );
   }
 }

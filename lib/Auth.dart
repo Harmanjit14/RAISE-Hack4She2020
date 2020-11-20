@@ -33,30 +33,13 @@ class _AuthState extends State<Auth> with ColorFile {
 
         break;
       default:
+        {
+          return login();
+        }
     }
   }
 
   Widget login() {
-    Future<bool> authChecker() async {
-      bool emailValid = RegExp(
-              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-          .hasMatch(email);
-      bool passValid;
-      print(password);
-      print(email);
-      if (password.length >= 6) {
-        passValid = true;
-      } else
-        passValid = false;
-      if (emailValid == true && passValid == true) {
-        print("yes!");
-        print(email + " " + password);
-        return true;
-      } else {
-        return false;
-      }
-    }
-
     return Container(
       child: SingleChildScrollView(
         child: Column(
@@ -330,7 +313,6 @@ class _AuthState extends State<Auth> with ColorFile {
   }
 
   Widget register() {
-
     void validate() {
       pass = password;
       if (pass.length > 6) {
@@ -561,7 +543,8 @@ class _AuthState extends State<Auth> with ColorFile {
                             setState(() {});
                           });
                           Timer(Duration(seconds: 3), () {
-                             Navigator.pushReplacementNamed(context, "/createProfile");
+                            Navigator.pushReplacementNamed(
+                                context, "/createProfile");
                           });
                         } else {
                           Timer(Duration(seconds: 2), () {
