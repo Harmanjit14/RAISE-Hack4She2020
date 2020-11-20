@@ -64,12 +64,12 @@ Future<int> sendDistress() {
     print("1");
     await getAndsendLoc();
   });
-  // Timer(Duration(seconds: 20), () async {
-  //   await getAndsendLoc();
-  // });
-  // Timer(Duration(seconds: 40), () async {
-  //   await getAndsendLoc();
-  // });
+  Timer(Duration(seconds: 20), () async {
+    await getAndsendLoc();
+  });
+  Timer(Duration(seconds: 40), () async {
+    await getAndsendLoc();
+  });
 }
 
 Future<int> getAndsendLoc() async {
@@ -98,9 +98,11 @@ Future<int> getAndsendLoc() async {
       timeLimit: Duration(seconds: 10), desiredAccuracy: LocationAccuracy.best);
   int lat = position.latitude.toInt();
   int long = position.longitude.toInt();
+  print(lat);
+  print(long);
   String getAuthToken = """
   mutation{
-    tokenAuth(latitude : "$lat", password: "$long"){
+    addPolice(latitude:$lat,longitude:$long){
       __typename
     }
   }
