@@ -567,6 +567,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> with ColorFile {
                         stateButP = 1;
                         setState(() {});
                         int temp = await updateProfileFunction();
+                        int temp2 = await getProfile();
 
                         if (temp == 1) {
                           Timer(Duration(seconds: 2), () {
@@ -574,7 +575,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> with ColorFile {
                             setState(() {});
                           });
                           Timer(Duration(seconds: 3), () {
-                            Navigator.pushReplacementNamed(context, "/dash");
+                            bmiCal();
+                            Navigator.pop(context);
+                            setState(() {});
                           });
                         } else {
                           Timer(Duration(seconds: 2), () {

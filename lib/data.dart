@@ -14,7 +14,7 @@ String selcPeriod = "";
 Color bmiCol = Colors.red;
 Color activeColor = Colors.red;
 Color activeColorP = Colors.black;
-double bmi = (weight * 10000) / (height * height);
+double bmi ;
 String bmiLog = "";
 String tempname = name;
 String tempgender = gender;
@@ -155,8 +155,13 @@ Future<int> getProfile() async {
     city = result.data["myprofile"]["city"];
     state = result.data["myprofile"]["state"];
     mobile = result.data["myprofile"]["mobile"];
+    bmiCal();
     return 1;
   }
+}
+
+void bmiCal() {
+  bmi = (weight * 10000) / (height * height);
 }
 
 Future<int> createUser() async {
@@ -253,7 +258,7 @@ Future<int> updateProfileFunction() async {
   AuthLink _authLink = AuthLink(
     //  headerKey: "Authorization",
     getToken: () async {
-      return "$token";
+      return "JWT $token";
     },
   );
   Link _link = _authLink.concat(_httpLink);
@@ -266,7 +271,7 @@ Future<int> updateProfileFunction() async {
     link: _link,
   );
   // print(tempname);
-  print(tempgender);
+  // print(tempgender);
   if (tempname == "" || tempname == null) {
     tempname = name;
   }
@@ -321,6 +326,7 @@ Future<int> updateProfileFunction() async {
     print("done");
     String tempVar = result.data["updateProfile"]["profile"]["name"].toString();
     print(tempVar);
+    bmiCal();
     return 1;
   }
 }
