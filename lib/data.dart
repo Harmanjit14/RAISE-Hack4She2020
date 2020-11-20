@@ -344,3 +344,69 @@ Future<int> updateProfileFunction() async {
     return 1;
   }
 }
+
+Future<int> createProfileFunction() async {
+  int temp = await getToken();
+  if (temp == 1) {
+    HttpLink _httpLink = HttpLink(
+      headers: {
+        "Authorization": "$token",
+      },
+      uri: "https://healthzen-backend.herokuapp.com/graphql",
+    );
+    AuthLink _authLink = AuthLink(
+      //  headerKey: "Authorization",
+      getToken: () async {
+        return "JWT $token";
+      },
+    );
+    Link _link = _authLink.concat(_httpLink);
+    GraphQLClient _client = GraphQLClient(
+      defaultPolicies: DefaultPolicies(
+          mutate:
+              Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+          query: Policies(fetch: FetchPolicy.noCache)),
+      cache:
+          NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+      link: _link,
+    );
+    String createMutation = '''
+  mutation{
+    createProfile(name : "$tempname", 
+    mobile : "$tempmobile", 
+    age : $tempage , 
+    gender : "$tempgender",
+    city :"$tempcity", 
+    state : "$tempstate", 
+    weight : $tempweight,
+    height:$tempheight){
+        profile{
+        name
+      }
+    }
+  }
+''';
+    MutationOptions createOptions = MutationOptions(
+      documentNode: gql(createMutation),
+    );
+
+    QueryResult result = await _client.mutate(createOptions);
+    if (result.loading) {
+      print("loading");
+      return 1;
+    } else if (result.hasException) {
+      print("failed");
+      print(result.exception);
+      return 0;
+    } else {
+      print("done");
+      String tempVar =
+          result.data["updateProfile"]["profile"]["name"].toString();
+      print(tempVar);
+      bmiCal();
+      return 1;
+    }
+  } else {
+    return 0;
+  }
+}
