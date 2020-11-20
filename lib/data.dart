@@ -21,7 +21,7 @@ Color activeColorP = Colors.black;
 double bmi;
 String bmiLog = "";
 String tempname = name;
-String tempgender = gender;
+String tempgender;
 String tempcity = city, tempstate = state, tempmobile = mobile;
 int tempage = age, tempheight = height, tempweight = weight;
 String token;
@@ -37,27 +37,6 @@ final Map<DateTime, List> periodDays = {
   DateTime(2020, 11, 1): ['Easter Sunday'],
   DateTime(2020, 11, 2): ['Easter Monday'],
 };
-// Client temp = Client()
-// HttpLink _httpLink = HttpLink(
-//   headers: {
-//     "Authorization": "$token",
-//   },
-//   uri: "https://healthzen-backend.herokuapp.com/graphql",
-// );
-// AuthLink _authLink = AuthLink(
-//   //  headerKey: "Authorization",
-//   getToken: () async {
-//     return "JWT $token";
-//   },
-// );
-// Link _link = _authLink.concat(_httpLink);
-// GraphQLClient _client = GraphQLClient(
-//   defaultPolicies: DefaultPolicies(
-//       mutate: Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
-//       query: Policies(fetch: FetchPolicy.noCache)),
-//   cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
-//   link: _link,
-// );
 
 Future<int> sendDistress() {
   print("started");

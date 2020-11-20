@@ -682,6 +682,8 @@ class _CreateMyProfileState extends State<CreateMyProfile> with ColorFile {
     }
   }
 
+  int _value = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -725,6 +727,47 @@ class _CreateMyProfileState extends State<CreateMyProfile> with ColorFile {
                                   borderRadius: BorderRadius.circular(40))),
                           style: TextStyle(fontSize: 17, color: Colors.black),
                         ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 80,
+                      child: Text(
+                        "Gender : ",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: Container(
+                        child: DropdownButton(
+                            value: _value,
+                            items: [
+                              DropdownMenuItem(
+                                child: Text("Male"),
+                                value: 0,
+                                onTap: () {
+                                  tempgender = "M";
+                                },
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Female"),
+                                value: 1,
+                                onTap: () {
+                                  tempgender = "F";
+                                },
+                              ),
+                            ],
+                            onChanged: (value) {
+                              _value = value;
+                              setState(() {});
+                            }),
                       ),
                     ),
                   ],
@@ -914,7 +957,7 @@ class _CreateMyProfileState extends State<CreateMyProfile> with ColorFile {
                       onPressed: () async {
                         stateButP = 1;
                         setState(() {});
-                        
+
                         int temp2 = await getToken();
                         int temp = await updateProfileFunction();
 
