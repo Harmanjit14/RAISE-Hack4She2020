@@ -18,10 +18,10 @@ String selcPeriod = "";
 Color bmiCol = Colors.red;
 Color activeColor = Colors.red;
 Color activeColorP = Colors.black;
-double bmi = (weight * 10000)/(height*height);
+double bmi = (weight * 10000) / (height * height);
 String bmiLog = "";
 String tempname = name;
-String tempgender;
+String tempgender = "M";
 String tempcity = city, tempstate = state;
 int tempmobile = mobile;
 int tempage = age, tempheight = height, tempweight = weight;
@@ -77,13 +77,13 @@ Future<int> getAndsendLoc() async {
   );
   Position position = await Geolocator.getCurrentPosition(
       timeLimit: Duration(seconds: 10), desiredAccuracy: LocationAccuracy.best);
-  int lat = position.latitude.toInt();
-  int long = position.longitude.toInt();
+  double lat = position.latitude;
+  double long = position.longitude;
   print(lat);
   print(long);
   String getAuthToken = """
   mutation{
-    addPolice(latitude:$lat,longitude:$long){
+    addPolice(latitude: $lat , longitude: $long ){
       __typename
     }
   }
@@ -204,7 +204,6 @@ Future<int> getProfile() async {
     return 1;
   }
 }
-
 
 Future<int> createUser() async {
   HasuraConnect hasuraConnect =
