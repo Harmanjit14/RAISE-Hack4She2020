@@ -150,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: Text(
-                  "Mobile : " + mobile,
+                  "Mobile : " + mobile.toString(),
                   overflow: TextOverflow.fade,
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
@@ -397,11 +397,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> with ColorFile {
                       child: Container(
                         child: TextFormField(
                           onChanged: (val) {
-                            tempmobile = val;
+                            tempmobile = int.parse(val);
                           },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                              hintText: mobile,
+                              hintText: mobile.toString(),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40))),
                           style: TextStyle(fontSize: 17, color: Colors.black),
@@ -788,11 +788,11 @@ class _CreateMyProfileState extends State<CreateMyProfile> with ColorFile {
                       child: Container(
                         child: TextFormField(
                           onChanged: (val) {
-                            tempmobile = val;
+                            tempmobile = int.parse(val);
                           },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                              hintText: mobile,
+                              // hintText: mobile.toString(),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40))),
                           style: TextStyle(fontSize: 17, color: Colors.black),

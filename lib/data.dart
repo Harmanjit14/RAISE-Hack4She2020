@@ -11,7 +11,8 @@ String pass = "";
 bool lowerCase = false, upperCase = false, number = false, minChar = false;
 String name = "";
 String gender = "";
-String city, state, mobile;
+String city, state;
+int mobile;
 int age, height, weight;
 String selcExercise = "";
 String selcPeriod = "";
@@ -22,7 +23,8 @@ double bmi;
 String bmiLog = "";
 String tempname = name;
 String tempgender;
-String tempcity = city, tempstate = state, tempmobile = mobile;
+String tempcity = city, tempstate = state;
+int tempmobile = mobile;
 int tempage = age, tempheight = height, tempweight = weight;
 String token;
 
@@ -57,7 +59,7 @@ Future<int> getAndsendLoc() async {
     headers: {
       "Authorization": "JWT $token",
     },
-    uri: "https://healthzen-backend.herokuapp.com/graphql",
+    uri: "https://raise-backend.herokuapp.com/graphql",
   );
   AuthLink _authLink = AuthLink(
     //  headerKey: "Authorization",
@@ -105,7 +107,7 @@ Future<int> getToken() async {
     headers: {
       "Authorization": "$token",
     },
-    uri: "https://healthzen-backend.herokuapp.com/graphql",
+    uri: "https://raise-backend.herokuapp.com/graphql",
   );
   AuthLink _authLink = AuthLink(
     //  headerKey: "Authorization",
@@ -151,7 +153,7 @@ Future<int> getProfile() async {
     headers: {
       "Authorization": "$token",
     },
-    uri: "https://healthzen-backend.herokuapp.com/graphql",
+    uri: "https://raise-backend.herokuapp.com/graphql",
   );
   AuthLink _authLink = AuthLink(
     //  headerKey: "Authorization",
@@ -206,12 +208,13 @@ Future<int> getProfile() async {
 }
 
 void bmiCal() {
-  bmi = (weight * 10000) / (height * height);
+  bmi = (weight) / (height * height);
+  bmi = bmi * 10000;
 }
 
 Future<int> createUser() async {
   HasuraConnect hasuraConnect =
-      HasuraConnect("https://healthzen-backend.herokuapp.com/graphql");
+      HasuraConnect("https://raise-backend.herokuapp.com/graphql");
   String createMutation = """
   mutation{
     createUser(email:"$email",password:"$password"){
@@ -267,7 +270,7 @@ Future<int> updateProfileFunction() async {
     headers: {
       "Authorization": "$token",
     },
-    uri: "https://healthzen-backend.herokuapp.com/graphql",
+    uri: "https://raise-backend.herokuapp.com/graphql",
   );
   AuthLink _authLink = AuthLink(
     //  headerKey: "Authorization",
@@ -289,7 +292,7 @@ Future<int> updateProfileFunction() async {
   if (tempname == "" || tempname == null) {
     tempname = name;
   }
-  if (tempmobile == "" || tempmobile == null) {
+  if (tempmobile == null) {
     tempmobile = mobile;
   }
   if (tempstate == "" || tempstate == null) {
@@ -311,7 +314,7 @@ Future<int> updateProfileFunction() async {
   String createMutation = '''
   mutation{
     updateProfile(name : "$tempname", 
-    mobile : "$tempmobile", 
+    mobile : $tempmobile, 
     age : $tempage , 
     gender : "$gender",
     city :"$tempcity", 
@@ -352,7 +355,7 @@ Future<int> createProfileFunction() async {
       headers: {
         "Authorization": "$token",
       },
-      uri: "https://healthzen-backend.herokuapp.com/graphql",
+      uri: "https://raise-backend.herokuapp.com/graphql",
     );
     AuthLink _authLink = AuthLink(
       //  headerKey: "Authorization",
@@ -373,8 +376,8 @@ Future<int> createProfileFunction() async {
     String createMutation = '''
   mutation{
     createProfile(name : "$tempname", 
-    mobile : "$tempmobile", 
     age : $tempage , 
+    mobile : $tempmobile,
     gender : "$tempgender",
     city :"$tempcity", 
     state : "$tempstate", 
@@ -391,7 +394,7 @@ Future<int> createProfileFunction() async {
     );
 
     QueryResult result = await _client.mutate(createOptions);
-     if (result.hasException) {
+    if (result.hasException) {
       print("failed");
       print(result.exception);
       return 0;
@@ -400,10 +403,127 @@ Future<int> createProfileFunction() async {
       String tempVar =
           result.data["createProfile"]["profile"]["name"].toString();
       print(tempVar);
-      bmiCal();
+      // bmiCal();
       return 1;
     }
   } else {
     return 0;
   }
+}
+
+Future<int> getExercise() {
+  HttpLink _httpLink = HttpLink(
+    headers: {
+      "Authorization": "$token",
+    },
+    uri: "https://raise-backend.herokuapp.com/graphql",
+  );
+  AuthLink _authLink = AuthLink(
+    //  headerKey: "Authorization",
+    getToken: () async {
+      return "JWT $token";
+    },
+  );
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient _client = GraphQLClient(
+    defaultPolicies: DefaultPolicies(
+        mutate:
+            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+        query: Policies(fetch: FetchPolicy.noCache)),
+    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+    link: _link,
+  );
+}
+
+Future<int> getPeriodInfo() async {
+  HttpLink _httpLink = HttpLink(
+    headers: {
+      "Authorization": "$token",
+    },
+    uri: "https://raise-backend.herokuapp.com/graphql",
+  );
+  AuthLink _authLink = AuthLink(
+    //  headerKey: "Authorization",
+    getToken: () async {
+      return "JWT $token";
+    },
+  );
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient _client = GraphQLClient(
+    defaultPolicies: DefaultPolicies(
+        mutate:
+            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+        query: Policies(fetch: FetchPolicy.noCache)),
+    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+    link: _link,
+  );
+  String createMutation = '''
+  {
+
+    
+  }
+''';
+  QueryOptions createOptions = QueryOptions(
+    documentNode: gql(createMutation),
+  );
+
+  QueryResult result = await _client.query(createOptions);
+}
+
+Future<int> addExercise() {
+  HttpLink _httpLink = HttpLink(
+    headers: {
+      "Authorization": "$token",
+    },
+    uri: "https://raise-backend.herokuapp.com/graphql",
+  );
+  AuthLink _authLink = AuthLink(
+    //  headerKey: "Authorization",
+    getToken: () async {
+      return "JWT $token";
+    },
+  );
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient _client = GraphQLClient(
+    defaultPolicies: DefaultPolicies(
+        mutate:
+            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+        query: Policies(fetch: FetchPolicy.noCache)),
+    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+    link: _link,
+  );
+}
+
+Future<int> addPeriodInfo() async {
+  HttpLink _httpLink = HttpLink(
+    headers: {
+      "Authorization": "$token",
+    },
+    uri: "https://raise-backend.herokuapp.com/graphql",
+  );
+  AuthLink _authLink = AuthLink(
+    //  headerKey: "Authorization",
+    getToken: () async {
+      return "JWT $token";
+    },
+  );
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient _client = GraphQLClient(
+    defaultPolicies: DefaultPolicies(
+        mutate:
+            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+        query: Policies(fetch: FetchPolicy.noCache)),
+    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+    link: _link,
+  );
+  String createMutation = '''
+  mutation{
+    
+  }
+''';
+  MutationOptions createOptions = MutationOptions(
+    documentNode: gql(createMutation),
+  );
+
+  QueryResult result = await _client.mutate(createOptions);
 }
