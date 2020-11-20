@@ -4,6 +4,7 @@ import 'package:RAISE/awareness.dart';
 import 'package:RAISE/colorFile.dart';
 import 'package:RAISE/health.dart';
 import 'package:RAISE/home.dart';
+import 'package:RAISE/data.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -79,7 +80,9 @@ class _DashState extends State<Dash> with ColorFile {
                     "Yes",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => {
+                    sendDistress(),
+                  },
                   color: Color.fromRGBO(0, 179, 134, 1.0),
                 ),
               ],
