@@ -340,7 +340,7 @@ Future<int> updateProfileFunction() async {
     print("done");
     String tempVar = result.data["updateProfile"]["profile"]["name"].toString();
     print(tempVar);
-    bmiCal();
+    // bmiCal();
     return 1;
   }
 }
@@ -391,17 +391,14 @@ Future<int> createProfileFunction() async {
     );
 
     QueryResult result = await _client.mutate(createOptions);
-    if (result.loading) {
-      print("loading");
-      return 1;
-    } else if (result.hasException) {
+     if (result.hasException) {
       print("failed");
       print(result.exception);
       return 0;
     } else {
       print("done");
       String tempVar =
-          result.data["updateProfile"]["profile"]["name"].toString();
+          result.data["createProfile"]["profile"]["name"].toString();
       print(tempVar);
       bmiCal();
       return 1;

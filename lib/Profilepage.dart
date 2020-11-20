@@ -691,7 +691,7 @@ class _CreateMyProfileState extends State<CreateMyProfile> with ColorFile {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Edit Profile",
+          "Create Profile",
           style: GoogleFonts.poppins(
             textStyle: TextStyle(),
           ),
@@ -958,17 +958,17 @@ class _CreateMyProfileState extends State<CreateMyProfile> with ColorFile {
                         stateButP = 1;
                         setState(() {});
 
-                        int temp2 = await getToken();
-                        int temp = await updateProfileFunction();
+                        int temp = await createProfileFunction();
 
-                        if (temp == 1 && temp2 == 1) {
+                        if (temp == 1) {
                           Timer(Duration(seconds: 2), () {
                             stateButP = 2;
                             setState(() {});
                           });
-                          Timer(Duration(seconds: 3), () {
+                          Timer(Duration(seconds: 3), () async {
                             bmiCal();
-                            Navigator.pop(context);
+                            await getProfile();
+                            Navigator.pushReplacementNamed(context, "/dash");
                             setState(() {});
                           });
                         } else {
