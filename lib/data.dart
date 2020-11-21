@@ -705,15 +705,13 @@ Future<int> getJobs() async {
   print(token);
   String queryProfile = """
   {
-    myprofile{
-      name
-      Age
-      Height
-      Weight
-      Gender
-      mobile
-      city 
-      state
+    alljobs{
+      title
+      description,
+      pay,
+      location,
+      mobile,
+      skillsrequired,
     }
   }
 """;
