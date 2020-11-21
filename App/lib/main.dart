@@ -1,5 +1,6 @@
 import 'package:RAISE/Auth.dart';
 import 'package:RAISE/Dashboard.dart';
+import 'package:RAISE/Myfitness.dart';
 import 'package:RAISE/Profilepage.dart';
 import 'package:RAISE/colorFile.dart';
 import 'package:RAISE/fitness.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget with ColorFile {
         '/createProfile': (context) => CreateMyProfile(),
         '/fit': (context) => FitnessScreen(),
         '/test': (context) => HealthTest(),
+        '/timer': (context) => MyFitness(),
       },
       initialRoute: "/",
     );

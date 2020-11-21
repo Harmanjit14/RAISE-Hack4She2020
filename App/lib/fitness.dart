@@ -28,7 +28,9 @@ class _FitnessScreenState extends State<FitnessScreen> with ColorFile {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.pushNamed(context, "/timer");
+        },
         backgroundColor: Colors.green,
         child: Icon(FontAwesomeIcons.clock),
       ),
