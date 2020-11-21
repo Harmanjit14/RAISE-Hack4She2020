@@ -60,6 +60,7 @@ flutter:
   assets:
     - lib/assets/exercise.gif
     - lib/assets/period.gif
+    - lib/assets/diet.jpg
     - lib/pics/0.png
     - lib/pics/3.png
 

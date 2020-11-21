@@ -44,45 +44,78 @@ class _FitnessScreenState extends State<FitnessScreen> with ColorFile {
       body: Container(
         child: SingleChildScrollView(
           child: Column(children: [
-            RaisedButton(
-          child: Text('Open IQPlayer'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => IQScreen(
-                  title: "hello",
-                  description: 'Simple video as a demo video',
-                  videoPlayerController: VideoPlayerController.network(
-                    'https://d11b76aq44vj33.cloudfront.net/media/720/video/5def7824adbbc.mp4',
-                  ),
-                  subtitleProvider: SubtitleProvider.fromNetwork(
-                      'https://duoidi6ujfbv.cloudfront.net/media/0/subtitles/5675420c9d9a3.vtt'),
-                  iqTheme: IQTheme(
-                    loadingProgress: SpinKitCircle(
-                      color: Colors.red,
-                    ),
-                    playButtonColor: Colors.transparent,
-                    videoPlayedColor: Colors.indigo,
-                    // playButton: (true) {
-                    //   if (isPlay)
-                    //     return Icon(
-                    //       Icons.pause_circle_filled,
-                    //       color: Colors.red,
-                    //       size: 50,
-                    //     );
-                    //   return Icon(
-                    //     Icons.play_circle_outline,
-                    //     color: Colors.red,
-                    //     size: 50,
-                    //   );
-                    // },
-                  ),
-                ),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+              child: Text(
+                "Fitness Videos",
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(color: Colors.white), fontSize: 35),
               ),
-            );
-          },
-        ),
+            ),
+            Container(
+              child: ListView(
+                shrinkWrap: true,
+                children: [],
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Text(
+                      "Diet Chart",
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(color: deepBrown), fontSize: 35),
+                    ),
+                  ),
+                  Container(
+                    child: Image.asset("lib/assets/diet.jpg"),
+                  ),
+                ],
+              ),
+            ),
+            RaisedButton(
+              child: Text('Open IQPlayer'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => IQScreen(
+                      title: "hello",
+                      description: 'Simple video as a demo video',
+                      videoPlayerController: VideoPlayerController.network(
+                        'https://d11b76aq44vj33.cloudfront.net/media/720/video/5def7824adbbc.mp4',
+                      ),
+                      iqTheme: IQTheme(
+                        loadingProgress: SpinKitCircle(
+                          color: Colors.white,
+                        ),
+                        playButtonColor: Colors.transparent,
+                        videoPlayedColor: Colors.indigo,
+
+                        // playButton: (true) {
+                        //   if (isPlay)
+                        //     return Icon(
+                        //       Icons.pause_circle_filled,
+                        //       color: Colors.red,
+                        //       size: 50,
+                        //     );
+                        //   return Icon(
+                        //     Icons.play_circle_outline,
+                        //     color: Colors.red,
+                        //     size: 50,
+                        //   );
+                        // },
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ]),
         ),
       ),
