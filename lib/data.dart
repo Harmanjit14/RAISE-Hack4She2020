@@ -679,3 +679,61 @@ Future<int> addPeriodInfo() async {
     return 1;
   }
 }
+
+Future<int> getJobs() async {
+  HttpLink _httpLink = HttpLink(
+    headers: {
+      "Authorization": "$token",
+    },
+    uri: "https://raise-backend.herokuapp.com/graphql",
+  );
+  AuthLink _authLink = AuthLink(
+    //  headerKey: "Authorization",
+    getToken: () async {
+      return "JWT $token";
+    },
+  );
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient _client = GraphQLClient(
+    defaultPolicies: DefaultPolicies(
+        mutate:
+            Policies(error: ErrorPolicy.all, fetch: FetchPolicy.networkOnly),
+        query: Policies(fetch: FetchPolicy.noCache)),
+    cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
+    link: _link,
+  );
+  print(token);
+  String queryProfile = """
+  {
+    myprofile{
+      name
+      Age
+      Height
+      Weight
+      Gender
+      mobile
+      city 
+      state
+    }
+  }
+""";
+  QueryOptions myprofile = QueryOptions(
+      documentNode: gql(queryProfile), fetchPolicy: FetchPolicy.networkOnly);
+
+  QueryResult result = await _client.query(myprofile);
+  if (result.hasException) {
+    print(result.exception);
+    return 0;
+  } else {
+    print(result.data.toString());
+    name = result.data["myprofile"]["name"];
+    age = result.data["myprofile"]["Age"];
+    height = result.data["myprofile"]["Height"];
+    weight = result.data["myprofile"]["Weight"];
+    gender = result.data["myprofile"]["Gender"];
+    city = result.data["myprofile"]["city"];
+    state = result.data["myprofile"]["state"];
+    mobile = result.data["myprofile"]["mobile"];
+    return 1;
+  }
+}
