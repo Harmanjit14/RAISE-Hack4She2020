@@ -30,6 +30,30 @@ String pString = "Start Tacking";
 
 final Map<DateTime, List> exerciseDays = {};
 final Map<DateTime, List> periodDays = {};
+List<String> ques = [
+  "Describe Your Current Mood",
+  "How do you Describe Yourself",
+  "Do you think you have a mental issue",
+  "What is your role in your family",
+  "Choose a quote",
+];
+List<List> ans = [
+  ["Terrible", " I am Fed up!", "Antisocial", "Happy"],
+  ["happy", "unhappy", "socially awkward", "cold"],
+  [
+    "I am worried",
+    "I dont think so",
+    "I feel Sad most of the times",
+    "I am fine"
+  ],
+  ["I dont have a role", "sensible one", "the funny one", "quite one"],
+  [
+    "Life's a bitch, then you die",
+    "Hard time reveals true friends",
+    "Worrying is productive as chewing gum",
+    "look on the bright side of life"
+  ]
+];
 
 Future<int> sendDistress() {
   print("started");

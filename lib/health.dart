@@ -20,7 +20,7 @@ class _HealthPageState extends State<HealthPage> with ColorFile {
               "Available Self-Tests",
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(
-                      color: Colors.pink, fontWeight: FontWeight.bold),
+                      color: Colors.black, fontWeight: FontWeight.bold),
                   fontSize: 30),
             ),
           ),
@@ -148,7 +148,7 @@ class _HealthPageState extends State<HealthPage> with ColorFile {
               "Articles",
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(
-                      color: Colors.pink, fontWeight: FontWeight.bold),
+                      color: Colors.black, fontWeight: FontWeight.bold),
                   fontSize: 30),
             ),
           ),
