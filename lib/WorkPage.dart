@@ -56,15 +56,26 @@ class _WorkPageState extends State<WorkPage> {
         Container(
           height: 500,
           child: ListView.builder(
-              shrinkWrap: true,
+              // shrinkWrap: true,
               itemCount: 2,
               itemBuilder: (BuildContext ctxt, int index) {
                 var temp = jobs[index];
                 titleN = temp["title"];
                 descN = temp["description"];
+                var loc = temp["location"];
+                var mob = temp["mobile"];
+                var skills = temp["skillsrequired"];
+                var pay = temp["pay"];
+                print(index);
+                print(titleN + " " + descN);
+                index++;
                 return box(
                   titleN,
                   descN,
+                  loc,
+                  mob,
+                  skills,
+                  pay,
                 );
               }),
         ),
@@ -73,11 +84,16 @@ class _WorkPageState extends State<WorkPage> {
   }
 }
 
-Widget box(String title, String descr) {
+Widget box(String title, String descr, String loc, String mob, String skills,
+    int pay) {
   return Container(
     child: Column(children: [
       Text(title),
       Text(descr),
+      // Text(pay.toString()),
+      // Text(skills),
+      // Text(mob),
+      // Text(loc),
       SizedBox(height: 10),
     ]),
   );
