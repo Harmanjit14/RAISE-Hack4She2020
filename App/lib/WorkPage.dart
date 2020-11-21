@@ -14,7 +14,7 @@ class _WorkPageState extends State<WorkPage> {
   var titleN;
   var descN;
   Future<int> getVals() async {
-    x = await getJobs();
+    // x = await getJobs();
     print("done");
     setState(() {});
   }

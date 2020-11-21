@@ -521,7 +521,7 @@ Future<int> getExercise()async {
   );
   String createMutation = '''
     {
-      getexercise{
+      getexerciseinfo{
         date
         month
         year
