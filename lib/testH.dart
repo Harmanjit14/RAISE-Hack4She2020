@@ -1,12 +1,14 @@
+import 'package:RAISE/colorFile.dart';
 import 'package:RAISE/data.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HealthTest extends StatefulWidget {
   @override
   _HealthTestState createState() => _HealthTestState();
 }
 
-class _HealthTestState extends State<HealthTest> {
+class _HealthTestState extends State<HealthTest> with ColorFile {
   retItems() {
     switch (i) {
       case 0:
@@ -81,7 +83,28 @@ class _HealthTestState extends State<HealthTest> {
                   setState(() {});
                 }),
             SizedBox(height: 10),
-            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RaisedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Submit!",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: deepPink,
+                ),
+                SizedBox(width: 50),
+                IconButton(
+                    iconSize: 30,
+                    color: deepPink,
+                    icon: Icon(FontAwesomeIcons.chevronCircleRight),
+                    onPressed: () {
+                      i = (i + 1) % 4;
+                      setState(() {});
+                    })
+              ],
+            )
           ],
         )),
       ),
