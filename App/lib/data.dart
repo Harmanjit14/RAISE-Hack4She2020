@@ -727,7 +727,7 @@ Future<int> getJobs() async {
     return 0;
   } else {
     
-   Map<String,dynamic> temp= {
+   Map<dynamic,dynamic> temp= {
       "title": result.data["alljobs"][0]["title"],
       "description":  result.data["alljobs"][0]["description"],
       "pay": result.data["alljobs"][0]["pay"],
@@ -736,7 +736,7 @@ Future<int> getJobs() async {
     };
     jobs.add(temp); 
     print(temp.toString());
-     Map<String,dynamic> temp2 = {
+     Map<dynamic,dynamic> temp2 = {
       "title": result.data["alljobs"][1]["title"],
       "description":  result.data["alljobs"][1]["description"],
       "pay": result.data["alljobs"][1]["pay"],
