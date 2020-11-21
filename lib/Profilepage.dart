@@ -238,6 +238,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: () {
                       token = "empty";
                       SystemNavigator.pop();
+
                     },
                     child: Text(
                       "Logout",
