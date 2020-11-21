@@ -108,7 +108,8 @@ class _AuthState extends State<Auth> with ColorFile {
                         setState(() {});
                         int temp = await getToken();
                         int temp2 = await getProfile();
-                        int temp3= await getPeriodInfo();
+                        int temp3 = await getPeriodInfo();
+                        int temp4 = await getExercise();
 
                         if (temp == 1 && temp2 == 1) {
                           Timer(Duration(seconds: 2), () {

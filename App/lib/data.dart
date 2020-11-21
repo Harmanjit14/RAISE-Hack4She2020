@@ -29,7 +29,7 @@ String token;
 String pString = "Start Tacking";
 String jtitle, jdesc, jloc, jmob, jskills;
 int jpay;
-List<Map> jobs;
+List<Map> jobs= new List(2);
 
 final Map<DateTime, List> exerciseDays = {};
 final Map<DateTime, List> periodDays = {};
@@ -497,7 +497,7 @@ Future<int> createProfileFunction() async {
   }
 }
 
-Future<int> getExercise() {
+Future<int> getExercise()async {
   HttpLink _httpLink = HttpLink(
     headers: {
       "Authorization": "$token",
@@ -519,6 +519,36 @@ Future<int> getExercise() {
     cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
     link: _link,
   );
+  String createMutation = '''
+    {
+      getexercise{
+        date
+        month
+        year
+      }
+    }
+''';
+  QueryOptions createOptions = QueryOptions(
+    documentNode: gql(createMutation),
+  );
+
+  QueryResult result = await _client.query(createOptions);
+  if (result.hasException) {
+    print(result.exception);
+    return 0;
+  } else {
+    try {
+      print(result.data.toString());
+      int day = result.data["getexerciseinfo"][0]["date"];
+      int mon = result.data["getexerciseinfo"][0]["month"];
+      int yr = result.data["getexerciseinfo"][0]["year"];
+      DateTime x = DateTime(yr, mon, day);
+      exerciseDays[x] = ["P"];
+      return 1;
+    } catch (e) {
+      return 1;
+    }
+  }
 }
 
 Future<int> getPeriodInfo() async {
@@ -734,7 +764,8 @@ Future<int> getJobs() async {
       "location": result.data["alljobs"][0]["location"],
       "skills": result.data["alljobs"][0]["skillsrequired"],
     };
-    jobs.add(temp); 
+    print(temp.toString());
+    jobs[2]= temp;
     print(temp.toString());
      Map<dynamic,dynamic> temp2 = {
       "title": result.data["alljobs"][1]["title"],
@@ -743,8 +774,7 @@ Future<int> getJobs() async {
       "location": result.data["alljobs"][1]["location"],
       "skills": result.data["alljobs"][1]["skillsrequired"],
     };
-    jobs.add(temp2);
-    print(temp2.toString());
+    jobs[2]= temp2;
     return 1;
   }
 }
