@@ -75,7 +75,7 @@ Future<int> getAndsendLoc() async {
   print(long);
   String getAuthToken = """
   mutation{
-    addPolice(latitude: $lat , longitude: $long ){
+    addPolice(latitude: "$lat" , longitude: "$long" ){
       __typename
     }
   }
@@ -470,8 +470,8 @@ Future<int> getPeriodInfo() async {
       var y1 = x.add(Duration(days: 27));
       var y2 = x.add(Duration(days: 29));
       var z = y.add(Duration(days: 28));
-      var z1 = x.add(Duration(days: 27));
-      var z2 = x.add(Duration(days: 29));
+      var z1 = y.add(Duration(days: 27));
+      var z2 = y.add(Duration(days: 29));
       periodDays[x] = ["P"];
       periodDays[y1] = ["P"];
       periodDays[y2] = ["P"];

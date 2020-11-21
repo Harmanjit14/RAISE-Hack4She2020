@@ -300,6 +300,7 @@ class _HomeWidState extends State<HomeWid> with ColorFile {
                             borderSide:
                                 BorderSide(color: Colors.blue[700], width: 2),
                             onPressed: () {
+                              Navigator.pushNamed(context, '/fit');
                               // getProfile();
                             },
                             child: Text(

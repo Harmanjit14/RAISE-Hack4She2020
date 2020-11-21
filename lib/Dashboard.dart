@@ -80,8 +80,10 @@ class _DashState extends State<Dash> with ColorFile {
                     "Yes",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  onPressed: () => {
-                    sendDistress(),
+                  onPressed: () {
+                    sendDistress();
+                    Navigator.pop(context);
+                    setState(() {});
                   },
                   color: Color.fromRGBO(0, 179, 134, 1.0),
                 ),

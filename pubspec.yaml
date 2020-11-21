@@ -39,6 +39,8 @@ dependencies:
   hasura_connect: ^2.0.0
   geolocator: ^6.1.7
   permissions_plugin: ^1.1.4
+  # video_player: ^1.0.1
+  iqplayer: ^0.4.0
 
 dev_dependencies:
   flutter_test:

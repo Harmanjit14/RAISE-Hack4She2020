@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:RAISE/colorFile.dart';
 import 'package:RAISE/data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -236,7 +237,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     padding: EdgeInsets.all(10),
                     onPressed: () {
                       token = "empty";
-                      Navigator.pushReplacementNamed(context, "/");
+                      SystemNavigator.pop();
                     },
                     child: Text(
                       "Logout",

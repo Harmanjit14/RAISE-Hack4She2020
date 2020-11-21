@@ -2,6 +2,7 @@ import 'package:RAISE/Auth.dart';
 import 'package:RAISE/Dashboard.dart';
 import 'package:RAISE/Profilepage.dart';
 import 'package:RAISE/colorFile.dart';
+import 'package:RAISE/fitness.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:permissions_plugin/permissions_plugin.dart';
@@ -33,9 +34,9 @@ class MyApp extends StatelessWidget with ColorFile {
         '/dash': (context) => Dash(),
         '/editProfile': (context) => EditProfileScreen(),
         '/createProfile': (context) => CreateMyProfile(),
+        '/fit': (context) => FitnessScreen(),
       },
       initialRoute: "/",
-     
     );
   }
 }
