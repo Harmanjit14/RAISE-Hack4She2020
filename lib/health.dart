@@ -41,6 +41,35 @@ class _HealthPageState extends State<HealthPage> with ColorFile {
                           children: [
                             Container(
                                 child: Text(
+                              "Mental Health!",
+                              style: TextStyle(fontSize: 20, color: white),
+                            )),
+                            IconButton(
+                              icon: Icon(Icons.navigate_next),
+                              onPressed: () {
+                                Navigator.pushNamed(context, "/test");
+                              },
+                              iconSize: 20,
+                              color: white,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(),
+                  Container(
+                    // height: 80,
+                    width: double.maxFinite,
+                    child: Card(
+                      color: Colors.pink.withOpacity(0.7),
+                      elevation: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Container(
+                                child: Text(
                               "Test1",
                               style: TextStyle(fontSize: 20, color: white),
                             )),
