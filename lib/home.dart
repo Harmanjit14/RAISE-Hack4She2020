@@ -75,6 +75,7 @@ class _HomeWidState extends State<HomeWid> with ColorFile {
                             ),
                             onPressed: () async {
                               await addPeriodInfo();
+                              await getPeriodInfo();
                               pString = "Done!";
                               setState(() {});
                               Navigator.pop(context);

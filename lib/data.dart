@@ -28,17 +28,8 @@ int tempage = age, tempheight = height, tempweight = weight;
 String token;
 String pString = "Start Tacking";
 
-final Map<DateTime, List> exerciseDays = {
-  DateTime(2020, 11, 11): ['New Year\'s Day'],
-  DateTime(2020, 11, 6): ['Epiphany'],
-  DateTime(2020, 11, 4): ['Valentine\'s Day'],
-  DateTime(2020, 11, 1): ['Easter Sunday'],
-  DateTime(2020, 11, 2): ['Easter Monday'],
-};
-final Map<DateTime, List> periodDays = {
-  DateTime(2020, 11, 1): ['Easter Sunday'],
-  DateTime(2020, 11, 2): ['Easter Monday'],
-};
+final Map<DateTime, List> exerciseDays = {};
+final Map<DateTime, List> periodDays = {};
 
 Future<int> sendDistress() {
   print("started");
@@ -452,16 +443,47 @@ Future<int> getPeriodInfo() async {
     link: _link,
   );
   String createMutation = '''
-  {
-
-    
-  }
+    {
+      getperiodinfo{
+        date
+        month
+        year
+      }
+    }
 ''';
   QueryOptions createOptions = QueryOptions(
     documentNode: gql(createMutation),
   );
 
   QueryResult result = await _client.query(createOptions);
+  if (result.hasException) {
+    print(result.exception);
+    return 0;
+  } else {
+    try {
+      print(result.data.toString());
+      int day = result.data["getperiodinfo"][0]["date"];
+      int mon = result.data["getperiodinfo"][0]["month"];
+      int yr = result.data["getperiodinfo"][0]["year"];
+      DateTime x = DateTime(yr, mon, day);
+      var y = x.add(Duration(days: 28));
+      var y1 = x.add(Duration(days: 27));
+      var y2 = x.add(Duration(days: 29));
+      var z = y.add(Duration(days: 28));
+      var z1 = x.add(Duration(days: 27));
+      var z2 = x.add(Duration(days: 29));
+      periodDays[x] = ["P"];
+      periodDays[y1] = ["P"];
+      periodDays[y2] = ["P"];
+      periodDays[z1] = ["P"];
+      periodDays[z2] = ["P"];
+      periodDays[y] = ["P"];
+      periodDays[z] = ["P"];
+      return 1;
+    } catch (e) {
+      return 1;
+    }
+  }
 }
 
 Future<int> addExercise() async {
