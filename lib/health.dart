@@ -19,9 +19,108 @@ class _HealthPageState extends State<HealthPage> with ColorFile {
             child: Text(
               "Available Self-Tests",
               style: GoogleFonts.poppins(
-                  textStyle:
-                      TextStyle(color: Colors.pink, fontWeight: FontWeight.bold),
-                  fontSize: 25),
+                  textStyle: TextStyle(
+                      color: Colors.pink, fontWeight: FontWeight.bold),
+                  fontSize: 30),
+            ),
+          ),
+          Container(
+              margin: EdgeInsets.only(top: 10),
+              height: 300,
+              child: ListView(
+                children: [
+                  Container(
+                    // height: 80,
+                    width: double.maxFinite,
+                    child: Card(
+                      color: Colors.pink.withOpacity(0.7),
+                      elevation: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Container(
+                                child: Text(
+                              "Test1",
+                              style: TextStyle(fontSize: 20, color: white),
+                            )),
+                            IconButton(
+                              icon: Icon(Icons.navigate_next),
+                              onPressed: () {},
+                              iconSize: 20,
+                              color: white,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(),
+                  Container(
+                    // height: 80,
+                    width: double.maxFinite,
+                    child: Card(
+                      color: Colors.pink.withOpacity(0.7),
+                      elevation: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Container(
+                                child: Text(
+                              "Test1",
+                              style: TextStyle(fontSize: 20, color: white),
+                            )),
+                            IconButton(
+                              icon: Icon(Icons.navigate_next),
+                              onPressed: () {},
+                              iconSize: 20,
+                              color: white,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(),
+                  Container(
+                    // height: 80,
+                    width: double.maxFinite,
+                    child: Card(
+                      color: Colors.pink.withOpacity(0.7),
+                      elevation: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Container(
+                                child: Text(
+                              "Test1",
+                              style: TextStyle(fontSize: 20, color: white),
+                            )),
+                            IconButton(
+                              icon: Icon(Icons.navigate_next),
+                              onPressed: () {},
+                              iconSize: 20,
+                              color: white,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 15),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Articles",
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.pink, fontWeight: FontWeight.bold),
+                  fontSize: 30),
             ),
           ),
         ]),
