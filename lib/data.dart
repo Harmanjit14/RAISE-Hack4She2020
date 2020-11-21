@@ -29,7 +29,7 @@ String token;
 String pString = "Start Tacking";
 String jtitle, jdesc, jloc, jmob, jskills;
 int jpay;
-List<Map> jobs = [];
+List<Map> jobs;
 
 final Map<DateTime, List> exerciseDays = {};
 final Map<DateTime, List> periodDays = {};
@@ -726,25 +726,25 @@ Future<int> getJobs() async {
     print(result.exception);
     return 0;
   } else {
-    int k = 0;
-    print("here");
-    for (var i in result.data["alljobs"]) {
-      print(i[k]["title"]);
-      // jtitle = i[k]["title"];
-      // jdesc = i[k]["description"];
-      // jpay = i[k]["pay"];
-      // jloc = i[k]["location"];
-      // jskills = i[k]["skillsrequired"];
-      // jobs[k] = {
-      //   "title": jtitle,
-      //   "description": jdesc,
-      //   "pay": jpay,
-      //   "location": jloc,
-      //   "skills": jskills,
-      // };
-      k++;
-      print("done"+k.toString());
-    }
+    
+   Map<String,dynamic> temp= {
+      "title": result.data["alljobs"][0]["title"],
+      "description":  result.data["alljobs"][0]["description"],
+      "pay": result.data["alljobs"][0]["pay"],
+      "location": result.data["alljobs"][0]["location"],
+      "skills": result.data["alljobs"][0]["skillsrequired"],
+    };
+    jobs.add(temp); 
+    print(temp.toString());
+     Map<String,dynamic> temp2 = {
+      "title": result.data["alljobs"][1]["title"],
+      "description":  result.data["alljobs"][1]["description"],
+      "pay": result.data["alljobs"][1]["pay"],
+      "location": result.data["alljobs"][1]["location"],
+      "skills": result.data["alljobs"][1]["skillsrequired"],
+    };
+    jobs.add(temp2);
+    print(temp2.toString());
     return 1;
   }
 }

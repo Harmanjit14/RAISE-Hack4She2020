@@ -9,7 +9,10 @@ class WorkPage extends StatefulWidget {
 }
 
 class _WorkPageState extends State<WorkPage> {
+  List<Widget> boxes;
   int x = 0;
+  var titleN;
+  var descN;
   Future<int> getVals() async {
     x = await getJobs();
     print("done");
@@ -50,12 +53,32 @@ class _WorkPageState extends State<WorkPage> {
             )),
           ),
         ),
-        // ListView.builder(
-        //     itemCount: jobs.length,
-        //     itemBuilder: (BuildContext ctxt, int index) {
-        //       return new Text(jobs[index]["name"]);
-        //     })
+        Container(
+          height: 500,
+          child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: 2,
+              itemBuilder: (BuildContext ctxt, int index) {
+                var temp = jobs[index];
+                titleN = temp["title"];
+                descN = temp["description"];
+                return box(
+                  titleN,
+                  descN,
+                );
+              }),
+        ),
       ]);
     }
   }
+}
+
+Widget box(String title, String descr) {
+  return Container(
+    child: Column(children: [
+      Text(title),
+      Text(descr),
+      SizedBox(height: 10),
+    ]),
+  );
 }

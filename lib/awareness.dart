@@ -74,7 +74,7 @@ class _AwarePageState extends State<AwarePage> with ColorFile {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Weight Loss for Women",
+                          "Stance and Palm Strike",
                           style: TextStyle(fontSize: 20, color: Colors.purple),
                         ),
                         SizedBox(width: 10),
@@ -94,7 +94,7 @@ class _AwarePageState extends State<AwarePage> with ColorFile {
                         context,
                         MaterialPageRoute(
                           builder: (BuildContext context) => IQScreen(
-                            title: "Weight Loss for all",
+                            title: "Stance and Palm Strike",
                             description: 'Fitness Videos',
                             videoPlayerController:
                                 VideoPlayerController.network(
@@ -129,7 +129,7 @@ class _AwarePageState extends State<AwarePage> with ColorFile {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Weight Loss for all",
+                          "Front in-Step Kick",
                           style: TextStyle(fontSize: 20, color: Colors.purple),
                         ),
                         SizedBox(width: 10),
@@ -184,7 +184,7 @@ class _AwarePageState extends State<AwarePage> with ColorFile {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Full Body Workout",
+                          "Font choke defence",
                           style: TextStyle(fontSize: 20, color: Colors.purple),
                         ),
                         SizedBox(width: 10),
@@ -239,7 +239,7 @@ class _AwarePageState extends State<AwarePage> with ColorFile {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "20-min Workout",
+                          "Side Clinch",
                           style: TextStyle(fontSize: 20, color: Colors.purple),
                         ),
                         SizedBox(width: 10),
@@ -259,7 +259,7 @@ class _AwarePageState extends State<AwarePage> with ColorFile {
                         context,
                         MaterialPageRoute(
                           builder: (BuildContext context) => IQScreen(
-                            title: "30-min Kick-Boxing",
+                            title: "Gun defence",
                             description: 'Fitness Videos',
                             videoPlayerController:
                                 VideoPlayerController.network(
@@ -294,7 +294,7 @@ class _AwarePageState extends State<AwarePage> with ColorFile {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "30-min Kick-Boxing",
+                          "Disarm a gun man",
                           style: TextStyle(fontSize: 20, color: Colors.purple),
                         ),
                         SizedBox(width: 10),
@@ -349,7 +349,7 @@ class _AwarePageState extends State<AwarePage> with ColorFile {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Temp Workout",
+                          "Temp defence",
                           style: TextStyle(fontSize: 20, color: Colors.purple),
                         ),
                         SizedBox(width: 10),
