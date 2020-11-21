@@ -150,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: Text(
-                  "Mobile : " + mobile.toString(),
+                  "Mobile : " + mobile,
                   overflow: TextOverflow.fade,
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
@@ -397,7 +397,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> with ColorFile {
                       child: Container(
                         child: TextFormField(
                           onChanged: (val) {
-                            tempmobile = int.parse(val);
+                            tempmobile = (val);
                           },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
@@ -788,7 +788,7 @@ class _CreateMyProfileState extends State<CreateMyProfile> with ColorFile {
                       child: Container(
                         child: TextFormField(
                           onChanged: (val) {
-                            tempmobile = int.parse(val);
+                            tempmobile = val;
                           },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(

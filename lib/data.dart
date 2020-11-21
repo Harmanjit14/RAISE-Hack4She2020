@@ -11,7 +11,7 @@ bool lowerCase = false, upperCase = false, number = false, minChar = false;
 String name = "";
 String gender = "";
 String city, state;
-int mobile;
+String mobile = "";
 int age, height, weight;
 String selcExercise = "";
 String selcPeriod = "";
@@ -23,7 +23,7 @@ String bmiLog = "";
 String tempname = name;
 String tempgender = "M";
 String tempcity = city, tempstate = state;
-int tempmobile = mobile;
+String tempmobile = mobile;
 int tempage = age, tempheight = height, tempweight = weight;
 String token;
 String pString = "Start Tacking";
@@ -286,7 +286,7 @@ Future<int> updateProfileFunction() async {
   if (tempname == "" || tempname == null) {
     tempname = name;
   }
-  if (tempmobile == null) {
+  if (tempmobile == "") {
     tempmobile = mobile;
   }
   if (tempstate == "" || tempstate == null) {
@@ -308,7 +308,7 @@ Future<int> updateProfileFunction() async {
   String createMutation = '''
   mutation{
     updateProfile(name : "$tempname", 
-    mobile : $tempmobile, 
+    mobile : "$tempmobile", 
     age : $tempage , 
     gender : "$gender",
     city :"$tempcity", 
@@ -371,7 +371,7 @@ Future<int> createProfileFunction() async {
   mutation{
     createProfile(name : "$tempname", 
     age : $tempage , 
-    mobile : $tempmobile,
+    mobile : "$tempmobile",
     gender : "$tempgender",
     city :"$tempcity", 
     state : "$tempstate", 
@@ -464,7 +464,7 @@ Future<int> getPeriodInfo() async {
   QueryResult result = await _client.query(createOptions);
 }
 
-Future<int> addExercise() {
+Future<int> addExercise() async {
   HttpLink _httpLink = HttpLink(
     headers: {
       "Authorization": "$token",
@@ -486,6 +486,30 @@ Future<int> addExercise() {
     cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
     link: _link,
   );
+  var temp = DateTime.now();
+  String createMutation = '''
+  mutation{
+     addExercise(date:${temp.day},month:${temp.month},year:${temp.year}){
+     __typename
+   }
+  }
+''';
+  MutationOptions createOptions = MutationOptions(
+    documentNode: gql(createMutation),
+  );
+  QueryResult result = await _client.mutate(createOptions);
+
+  if (result.hasException) {
+    print("failed");
+    print(result.exception);
+    return 0;
+  } else {
+    print("done");
+    // String tempVar = result.data["createProfile"]["profile"]["name"].toString();
+    // print(tempVar);
+    // bmiCal();
+    return 1;
+  }
 }
 
 Future<int> addPeriodInfo() async {
