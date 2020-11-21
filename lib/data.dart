@@ -27,6 +27,9 @@ String tempmobile = mobile;
 int tempage = age, tempheight = height, tempweight = weight;
 String token;
 String pString = "Start Tacking";
+String jtitle, jdesc, jloc, jmob, jskills;
+int jpay;
+List<Map> jobs = [];
 
 final Map<DateTime, List> exerciseDays = {};
 final Map<DateTime, List> periodDays = {};
@@ -723,15 +726,25 @@ Future<int> getJobs() async {
     print(result.exception);
     return 0;
   } else {
-    print(result.data.toString());
-    name = result.data["myprofile"]["name"];
-    age = result.data["myprofile"]["Age"];
-    height = result.data["myprofile"]["Height"];
-    weight = result.data["myprofile"]["Weight"];
-    gender = result.data["myprofile"]["Gender"];
-    city = result.data["myprofile"]["city"];
-    state = result.data["myprofile"]["state"];
-    mobile = result.data["myprofile"]["mobile"];
+    int k = 0;
+    print("here");
+    for (var i in result.data["alljobs"]) {
+      print(i[k]["title"]);
+      // jtitle = i[k]["title"];
+      // jdesc = i[k]["description"];
+      // jpay = i[k]["pay"];
+      // jloc = i[k]["location"];
+      // jskills = i[k]["skillsrequired"];
+      // jobs[k] = {
+      //   "title": jtitle,
+      //   "description": jdesc,
+      //   "pay": jpay,
+      //   "location": jloc,
+      //   "skills": jskills,
+      // };
+      k++;
+      print("done"+k.toString());
+    }
     return 1;
   }
 }

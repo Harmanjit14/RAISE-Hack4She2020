@@ -9,16 +9,18 @@ class WorkPage extends StatefulWidget {
 }
 
 class _WorkPageState extends State<WorkPage> {
+  int x = 0;
   Future<int> getVals() async {
     x = await getJobs();
+    print("done");
     setState(() {});
   }
 
-  int x = 0;
-
   @override
   Widget build(BuildContext context) {
-    if (x == 1) {
+    //  getVals();
+    if (x == 0) {
+      getVals();
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -31,11 +33,6 @@ class _WorkPageState extends State<WorkPage> {
               "Loading...",
               style: TextStyle(color: Colors.black),
             ),
-            ListView.builder(
-                itemCount: litems.length,
-                itemBuilder: (BuildContext ctxt, int index) {
-                  return new Text(litems[index]);
-                })
           ],
         ),
       );
@@ -53,6 +50,11 @@ class _WorkPageState extends State<WorkPage> {
             )),
           ),
         ),
+        // ListView.builder(
+        //     itemCount: jobs.length,
+        //     itemBuilder: (BuildContext ctxt, int index) {
+        //       return new Text(jobs[index]["name"]);
+        //     })
       ]);
     }
   }
