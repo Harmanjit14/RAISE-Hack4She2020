@@ -3,6 +3,8 @@ Server for tracking distress signals from app -> https://raise-emergencies.web.a
 Backend Server -> http://raise-backend.herokuapp.com/EmergencyServices/jobs/ <br />
 email : gurleen@abc.com <br />
 password : gurleen11 <br /><br /><br />
+About the Project -> https://www.youtube.com/watch?v=wXXzk4HOYI8
+<br /><br /><br />
 
 <br />Here backend and web folders are not opening, check them at their original links<br />
 repo links :- <br />
